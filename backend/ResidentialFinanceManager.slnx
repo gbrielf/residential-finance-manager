@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="ResidentialFinanceManager.Api/ResidentialFinanceManager.Api.csproj" />
+  <Project Path="ResidentialFinanceManager.Tests/ResidentialFinanceManager.Tests.csproj" />
+</Solution>
