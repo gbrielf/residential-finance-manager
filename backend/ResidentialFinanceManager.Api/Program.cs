@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using ResidentialFinanceManager.Api.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -5,6 +8,14 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
+
+// injeção de dependências
+// "quando alguém pedir um AppDbContext, crie um usando SQLite"
+builder.Services.AddDbContext<AppDbContext>(
+    options => options.UseSqlite(
+        builder.Configuration.GetConnectionString("DefaultConnection")
+        )
+    );
 
 var app = builder.Build();
 
