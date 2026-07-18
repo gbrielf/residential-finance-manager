@@ -1,0 +1,43 @@
+{
+    "name": "Residential Finance Manager",
+    "image": "mcr.microsoft.com/devcontainers/dotnet:1-10.0-noble",
+    "features": {
+        "ghcr.io/devcontainers/features/node:1": {
+            "version": "24"
+        },
+        "ghcr.io/devcontainers/features/github-cli:1": {}
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-dotnettools.csdevkit",
+                "ms-dotnettools.csharp",
+                "ms-dotnettools.vscode-dotnet-runtime",
+                "dbaumer.vscode-eslint",
+                "esbenp.prettier-vscode",
+                "eamodio.gitlens"
+            ],
+            "settings": {
+                "editor.formatOnSave": true,
+                "files.exlude": {
+                    "**/bin": true,
+                    "**/obj": true
+                }
+            }
+        }
+    },
+    "forwardPorts": [
+        5000,
+        5173
+    ],
+    "portsAttributes": {
+        "5000": {
+            "label": "ASP.NET Core API"
+        },
+        "5173": {
+            "label": "React Vite Frontend"
+        }
+    },
+    "postCreateCommand": "dotnet tool install --global dotnet-ef || dotnet tool update --global dotnet-ef",
+    "remoteUser": "vscode"
+}
