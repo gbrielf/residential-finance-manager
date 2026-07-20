@@ -16,6 +16,32 @@ namespace ResidentialFinanceManager.Api.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "10.0.10");
 
+            modelBuilder.Entity("ResidentialFinanceManager.Api.Entities.FinancialTransaction", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("PersonId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<decimal>("Value")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PersonId");
+
+                    b.ToTable("FinancialTransaction");
+                });
+
             modelBuilder.Entity("ResidentialFinanceManager.Api.Entities.Person", b =>
                 {
                     b.Property<int>("Id")
@@ -32,6 +58,18 @@ namespace ResidentialFinanceManager.Api.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("People");
+                });
+
+            modelBuilder.Entity("ResidentialFinanceManager.Api.Entities.FinancialTransaction", b =>
+                {
+                    b.HasOne("ResidentialFinanceManager.Api.Entities.Person", null)
+                        .WithMany("Transactions")
+                        .HasForeignKey("PersonId");
+                });
+
+            modelBuilder.Entity("ResidentialFinanceManager.Api.Entities.Person", b =>
+                {
+                    b.Navigation("Transactions");
                 });
 #pragma warning restore 612, 618
         }
