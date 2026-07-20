@@ -1,6 +1,6 @@
 namespace ResidentialFinanceManager.Api.Entities;
 
-public enum TypeChoices
+public enum TransactionType
 {
     Income,
     Expense,
@@ -16,7 +16,7 @@ public class FinancialTransaction
     public decimal Value { get; set; }
 
     //Income ou Expenses
-    public TypeChoices Type { get; set; }
+    public TransactionType Type { get; set; }
 
     public int PersonId { get; set; }
 
