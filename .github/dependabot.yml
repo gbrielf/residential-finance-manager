@@ -1,0 +1,10 @@
+version: 2
+updates:
+  - package-ecosystem: "nuget"
+    directory: "/backend/ResidentialFinanceManager.Api"
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "nuget"
+    directory: "/backend/ResidentialFinanceManager.Tests"
+    schedule:
+      interval: "daily"
