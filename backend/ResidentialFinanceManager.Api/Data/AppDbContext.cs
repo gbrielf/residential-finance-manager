@@ -11,5 +11,5 @@ public class AppDbContext : DbContext
 
     public DbSet<Person> People { get; set; } = null!;
 
-    // public DbSet<FinancialTransaction> Transactions { get; set; } = null!;
+    public DbSet<FinancialTransaction> Transactions { get; set; } = null!;
 }
