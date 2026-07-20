@@ -1,6 +1,8 @@
+using System.Transactions;
 using Microsoft.EntityFrameworkCore;
 using ResidentialFinanceManager.Api.Data;
 using ResidentialFinanceManager.Api.Features.People.Services;
+using ResidentialFinanceManager.Api.Features.Transactions.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,6 +25,8 @@ builder.Services.AddDbContext<AppDbContext>(
 
 // AddScoped = Crie uma instância do serviço para cada requisição HTTP
 builder.Services.AddScoped<IPersonService, PersonService>();
+
+builder.Services.AddScoped<ITransactionService, TransactionService>();
 
 var app = builder.Build();
 

@@ -10,8 +10,8 @@ using ResidentialFinanceManager.Api.Data;
 namespace ResidentialFinanceManager.Api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260720145313_Transactions")]
-    partial class Transactions
+    [Migration("20260720195550_InitialSchema")]
+    partial class InitialSchema
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -29,7 +29,7 @@ namespace ResidentialFinanceManager.Api.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("PersonId")
+                    b.Property<int>("PersonId")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("Type")
@@ -42,7 +42,7 @@ namespace ResidentialFinanceManager.Api.Migrations
 
                     b.HasIndex("PersonId");
 
-                    b.ToTable("FinancialTransaction");
+                    b.ToTable("Transactions");
                 });
 
             modelBuilder.Entity("ResidentialFinanceManager.Api.Entities.Person", b =>
@@ -65,9 +65,13 @@ namespace ResidentialFinanceManager.Api.Migrations
 
             modelBuilder.Entity("ResidentialFinanceManager.Api.Entities.FinancialTransaction", b =>
                 {
-                    b.HasOne("ResidentialFinanceManager.Api.Entities.Person", null)
+                    b.HasOne("ResidentialFinanceManager.Api.Entities.Person", "Person")
                         .WithMany("Transactions")
-                        .HasForeignKey("PersonId");
+                        .HasForeignKey("PersonId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Person");
                 });
 
             modelBuilder.Entity("ResidentialFinanceManager.Api.Entities.Person", b =>

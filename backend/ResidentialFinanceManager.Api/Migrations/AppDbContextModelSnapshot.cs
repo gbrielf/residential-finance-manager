@@ -26,7 +26,7 @@ namespace ResidentialFinanceManager.Api.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("PersonId")
+                    b.Property<int>("PersonId")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("Type")
@@ -39,7 +39,7 @@ namespace ResidentialFinanceManager.Api.Migrations
 
                     b.HasIndex("PersonId");
 
-                    b.ToTable("FinancialTransaction");
+                    b.ToTable("Transactions");
                 });
 
             modelBuilder.Entity("ResidentialFinanceManager.Api.Entities.Person", b =>
@@ -62,9 +62,13 @@ namespace ResidentialFinanceManager.Api.Migrations
 
             modelBuilder.Entity("ResidentialFinanceManager.Api.Entities.FinancialTransaction", b =>
                 {
-                    b.HasOne("ResidentialFinanceManager.Api.Entities.Person", null)
+                    b.HasOne("ResidentialFinanceManager.Api.Entities.Person", "Person")
                         .WithMany("Transactions")
-                        .HasForeignKey("PersonId");
+                        .HasForeignKey("PersonId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Person");
                 });
 
             modelBuilder.Entity("ResidentialFinanceManager.Api.Entities.Person", b =>

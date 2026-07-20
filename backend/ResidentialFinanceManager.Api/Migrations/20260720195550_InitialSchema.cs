@@ -5,13 +5,13 @@
 namespace ResidentialFinanceManager.Api.Migrations
 {
     /// <inheritdoc />
-    public partial class Transactions : Migration
+    public partial class InitialSchema : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "FinancialTransaction",
+                name: "Transactions",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
@@ -19,21 +19,22 @@ namespace ResidentialFinanceManager.Api.Migrations
                     Description = table.Column<string>(type: "TEXT", nullable: false),
                     Value = table.Column<decimal>(type: "TEXT", nullable: false),
                     Type = table.Column<int>(type: "INTEGER", nullable: false),
-                    PersonId = table.Column<int>(type: "INTEGER", nullable: true)
+                    PersonId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_FinancialTransaction", x => x.Id);
+                    table.PrimaryKey("PK_Transactions", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_FinancialTransaction_People_PersonId",
+                        name: "FK_Transactions_People_PersonId",
                         column: x => x.PersonId,
                         principalTable: "People",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_FinancialTransaction_PersonId",
-                table: "FinancialTransaction",
+                name: "IX_Transactions_PersonId",
+                table: "Transactions",
                 column: "PersonId");
         }
 
@@ -41,7 +42,7 @@ namespace ResidentialFinanceManager.Api.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "FinancialTransaction");
+                name: "Transactions");
         }
     }
 }
