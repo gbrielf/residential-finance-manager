@@ -1,5 +1,6 @@
 namespace ResidentialFinanceManager.Api.Entities;
 
+// tabela Pessoa
 public class Person
 {
     public int Id { get; set; }
@@ -8,5 +9,5 @@ public class Person
 
     public int Age { get; set; }
 
-    // public ICollection<FinancialTransaction> Transactions { get; set; } = new List<FinancialTransaction>();
+    public ICollection<FinancialTransaction> Transactions { get; set; } = new List<FinancialTransaction>();
 }
