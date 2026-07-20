@@ -1,13 +1,17 @@
 using Microsoft.EntityFrameworkCore;
 using ResidentialFinanceManager.Api.Data;
+using ResidentialFinanceManager.Api.Features.People.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
+// Add services to the controllers
 builder.Services.AddControllers();
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi();
+
+// configurção de serviço do swagger e respectio endpoint
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 // injeção de dependências
 // "quando alguém pedir um AppDbContext, crie um usando SQLite"
@@ -17,12 +21,16 @@ builder.Services.AddDbContext<AppDbContext>(
         )
     );
 
+// AddScoped = Crie uma instância do serviço para cada requisição HTTP
+builder.Services.AddScoped<IPersonService, PersonService>();
+
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Ativando middleware
 if (app.Environment.IsDevelopment())
 {
-    app.MapOpenApi();
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
 
 app.UseHttpsRedirection();
