@@ -3,7 +3,7 @@ namespace ResidentialFinanceManager.Api.Entities;
 public enum TypeChoices
 {
     Income,
-    Expenses,
+    Expense,
 }
 
 // tabela das Transações
@@ -17,5 +17,9 @@ public class FinancialTransaction
 
     //Income ou Expenses
     public TypeChoices Type { get; set; }
+
+    public int PersonId { get; set; }
+
+    public Person Person { get; set; } = null!;
     
 }
