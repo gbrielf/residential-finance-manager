@@ -19,22 +19,9 @@ public class TransactionsController : ControllerBase
     public async Task<ActionResult<TransactionResponse>> Create(
         CreateTransactionRequest request)
     {
-        // capturando as exceçoes do service caso algo dê errado
-        try
-        {
-            var transaction = await _transactionService.CreateAsync(request);
+        var transaction = await _transactionService.CreateAsync(request);
 
-            // retorna status 201 created
-            return Created(string.Empty, transaction);
-        }
-        catch (KeyNotFoundException ex)
-        {
-            return NotFound(ex.Message);
-        }
-        catch (InvalidOperationException ex)
-        {
-            return BadRequest(ex.Message);
-        }
+        return Created(string.Empty, transaction);
     }
 
     [HttpGet]
