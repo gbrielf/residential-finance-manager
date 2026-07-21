@@ -17,12 +17,17 @@ public class TransactionService : ITransactionService
     public async Task<TransactionResponse> CreateAsync(CreateTransactionRequest request)
     {
         var person = await _context.People.FindAsync(request.PersonId);
-
+        // exceção caso a pessoa não exista
         if (person == null)
         {
             throw new KeyNotFoundException("Pessoa não encontrada.");
         }
-
+        // se a pessoa tentar entrar alguma forma de tipo que não seja despesa ou receita
+        if (!Enum.IsDefined(request.Type))
+        {
+            throw new ArgumentException("Tipo de transação inválido.");
+        }
+        // exceção para quando a pessoa quer cadastrar uma receita de um usuário menor de 18 anos
         if (person.Age < 18 && request.Type == TransactionType.Income)
         {
             throw new InvalidOperationException(

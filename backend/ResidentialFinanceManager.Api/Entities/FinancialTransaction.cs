@@ -2,8 +2,8 @@ namespace ResidentialFinanceManager.Api.Entities;
 
 public enum TransactionType
 {
-    Income,
-    Expense,
+    Income, // int 0
+    Expense, // int 1
 }
 
 // tabela das Transações
