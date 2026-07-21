@@ -3,6 +3,7 @@ using ResidentialFinanceManager.Api.Data;
 using ResidentialFinanceManager.Api.Middleware;
 using ResidentialFinanceManager.Api.Features.People.Services;
 using ResidentialFinanceManager.Api.Features.Transactions.Services;
+using ResidentialFinanceManager.Api.Features.Reports.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +22,7 @@ builder.Services.AddDbContext<AppDbContext>(
 // AddScoped = Crie uma instância do serviço para cada requisição HTTP
 builder.Services.AddScoped<IPersonService, PersonService>();
 builder.Services.AddScoped<ITransactionService, TransactionService>();
+builder.Services.AddScoped<IReportService, ReportService>();
 
 var app = builder.Build();
 
