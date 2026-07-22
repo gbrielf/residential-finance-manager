@@ -19,7 +19,7 @@
             ],
             "settings": {
                 "editor.formatOnSave": true,
-                "files.exlude": {
+                "files.exclude": {
                     "**/bin": true,
                     "**/obj": true
                 }
@@ -27,7 +27,7 @@
         }
     },
     "forwardPorts": [
-        5000,
+        5119,
         5173
     ],
     "portsAttributes": {
